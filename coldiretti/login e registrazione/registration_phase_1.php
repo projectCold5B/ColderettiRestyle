@@ -6,48 +6,65 @@
   </head>
   <body>
 <?php
+
 //Raccolgo dati dell'utente
 $nome=($_POST['nome']);
 $cognome=($_POST['cognome']);
 $email=($_POST['email']);
 $telefono=($_POST['telefono']);
+$indirizzo=($_POST['indirizzo']);
 $password=($_POST['password']);
-$confpassword=($_POST['confpassword']);
+$confpassword=($_POST['confpass']);
 
 //Controllo che i campi siano tutti pieni
-if ($nome==null||$cognome==null||$email==null||$telefono==null||$password==null||$Confpassword==null)
-echo "Verifica che tutti i campi siano riempiti" . file_get_contents("index.html");
+if ($nome==null||$cognome==null||$email==null||$telefono==null||$password==null||$confpassword==null||$indirizzo==null)
+echo "<center>Verifica che tutti i campi siano riempiti</center>".file_get_contents("index.html");
   else
   if($password!=$confpassword)
-    echo "Le due password non conincidono".file_get_contents("index.html");
+    echo "<center>Le due password non conincidono</center>".file_get_contents("index.html");
     else
     registrazione();
 
 function registrazione()
 {
+  //parametri connessione database
   $host="localhost";
   $user_db="account1";
   $psw_db="";
-  $db="coldiretti";
+  $db="Coldiretti";
 
-  global $nome, $cognome, $email, $telefono, $password;
+  //rendo globali le variabili relative ai dati inseriti dall'utente
+  global $nome, $cognome, $email, $telefono, $password, $indirizzo;
 
+  //connessione al database
   $connection=mysqli_connect($host, $user_db, $psw_db, $db);
   if (!$connection) die(mysqli_connect_error());
 
-  $query="INSERT INTO utenti (nome, cognome,password,email,telefono,conferma) VALUES ($nome, $cognome,$email, $telefono, $password, "false" )";
+  //query di inserimento dati
+  $query="INSERT INTO utenti (nome, cognome,password,email,telefono,conferma, indirizzo) VALUES ($nome, $cognome,$email, $telefono, $password, false, '$indirizzo')";
 
+  //lancio la query
   $result=mysqli_query($connection, $query);
+  //se la query è andata a buon fine allora...
   if ($result)
       {
+      $email="gabrielorru@hotmail.com";$password="prova";
           //efinisco mittente e destinatario della mail
-          $nome_mittente = "Mio nome";
-          $mail_mittente = "Mia mail";
-          $mail_destinatario = $email;
+          $nome_mittente = "Gabriel";
+          $mail_mittente = "gabrielorru@hotmail.com";
+          $mail_destinatario = "gabrielorru@hotmail.com";//$email;
 
           //definisco il subject e il body della mail
           $mail_oggetto = "Conferma registrazione account Coldiretti";
-          $mail_corpo = "<center>Congratulazioni!<br>Conferma l'iscrizione a Coldiretti cliccando qui e inserendo mail e password</center>";
+          $mail_corpo = "
+                          <center>
+                            <h2>Conferma registrazione Coldiretti</h2>
+                            <br><br><br>
+                            <p>Clicca il il testo qui sotto per confermare la registrazione<p>
+                            <br><br>
+                            <a href='registration_phase_2.php?email='$email'&password='md5($password)''>Conferma</a>
+                          </center>
+                        ";
 
           //aggiusto un po' le intestazioni della mail
           //E' in questa sezione che deve essere definito il mittente (From)
@@ -61,6 +78,7 @@ function registrazione()
             else
               echo "Errore. Nessun messaggio inviato.";
       }
+      //se la query non è andata a buon fine allora...
     else
       echo "<center>Si è verificato un errore nella registrazione. <br> Per favore, riprovare</center>".file_get_contents("index.html");
 }
