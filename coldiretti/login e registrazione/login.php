@@ -7,11 +7,11 @@
   <body>
 <?php
 
-$username=$_POST['username'];
-$password=md5($_POST['password']);
+$email=$_POST['email'];
+$password=$_POST['password'];
 
-if ($username==null||$password==null)
-  echo file_get_contents("index.html");
+if ($email==null||$password==null)
+  echo "</center>Attenzione, compilare tutti i campi<center>".file_get_contents("index.html");
   else {
     autenticazione();
   }
@@ -22,15 +22,15 @@ function autenticazione()
   $host="localhost";
   $user_db="account1";
   $psw_db="";
-  $db="utenti";
+  $db="Coldiretti";
 
-  global $username;
+  global $email;
   global $password;
 
   $connection=mysqli_connect($host, $user_db, $psw_db, $db);
   if (!$connection) die(mysqli_connect_error());
 
-  $query="SELECT * FROM credenziali WHERE Username='$username' AND Password='$password'";
+  $query="SELECT * FROM credenziali WHERE Email='$email' AND Password='$password'";
   $result=mysqli_query($connection, $query);
   if (@mysqli_num_rows($result)==1)
       echo file_get_contents("home.html");
