@@ -48,11 +48,10 @@ function registrazione()
   //se la query è andata a buon fine allora...
   if ($result)
       {
-      $email="gabrielorru@hotmail.com";$password="prova";
           //efinisco mittente e destinatario della mail
-          $nome_mittente = "Gabriel";
-          $mail_mittente = "gabrielorru@hotmail.com";
-          $mail_destinatario = "gabrielorru@hotmail.com";//$email;
+          $nome_mittente = "";
+          $mail_mittente = "";
+          $mail_destinatario = $email;
 
           //definisco il subject e il body della mail
           $mail_oggetto = "Conferma registrazione account Coldiretti";
