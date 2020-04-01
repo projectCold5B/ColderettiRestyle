@@ -28,7 +28,7 @@ $db = new database;
   $connection=$db->Connect();
   if (!$connection) die(mysqli_connect_error());
 
-  $query="SELECT * FROM credenziali WHERE Email='$email' AND Password='$password'";
+  $query="SELECT * FROM Credenziali WHERE Email='$email' AND Password='$password'";
   $result=mysqli_query($connection, $query);
   if (@mysqli_num_rows($result)==1)
       echo file_get_contents("index.html");
