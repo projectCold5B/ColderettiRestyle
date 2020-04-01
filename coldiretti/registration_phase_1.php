@@ -27,17 +27,15 @@ echo "<center>Verifica che tutti i campi siano riempiti</center>".file_get_conte
 
 function registrazione()
 {
-  //parametri connessione database
-  $host="localhost";
-  $user_db="account1";
-  $psw_db="";
-  $db="Coldiretti";
+//richiamo alla classe database per la connessione
+require '../php/db.php';
+$db = new database;
 
   //rendo globali le variabili relative ai dati inseriti dall'utente
   global $nome, $cognome, $email, $telefono, $password, $indirizzo;
 
   //connessione al database
-  $connection=mysqli_connect($host, $user_db, $psw_db, $db);
+  $connection=$db->Connect();
   if (!$connection) die(mysqli_connect_error());
 
   //query di inserimento dati

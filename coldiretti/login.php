@@ -19,15 +19,13 @@ if ($email==null||$password==null)
 function autenticazione()
 {
 
-  $host="localhost";
-  $user_db="account1";
-  $psw_db="";
-  $db="Coldiretti";
+require '../php/db.php';
+$db = new database;
 
   global $email;
   global $password;
 
-  $connection=mysqli_connect($host, $user_db, $psw_db, $db);
+  $connection=$db->Connect();
   if (!$connection) die(mysqli_connect_error());
 
   $query="SELECT * FROM credenziali WHERE Email='$email' AND Password='$password'";

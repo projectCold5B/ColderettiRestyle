@@ -21,16 +21,14 @@ echo "<center>Si è verificato un errore, riprova o contatta l'assistenza</cente
 function confermaRegistrazione()
 {
   //parametri connessione database
-  $host="localhost";
-  $user_db="account1";
-  $psw_db="";
-  $db="coldiretti";
+require '../php/db.php';
+$db = new database;
 
   //rendo globali le variabili relative ai dati dell'utente
   global $email, $password;
 
   //mi connetto al database
-  $connection=mysqli_connect($host, $user_db, $psw_db, $db);
+  $connection=$db->Connect();
 
   //controllo che la connessione sia riuscita
   if (!$connection) die(mysqli_connect_error());
