@@ -11,7 +11,7 @@ $email=$_POST['email'];
 $password=$_POST['password'];
 
 if ($email==null||$password==null)
-  echo "</center>Attenzione, compilare tutti i campi<center>".file_get_contents("index.html");
+  echo "</center>Attenzione, compilare tutti i campi<center>".file_get_contents("login.html");
   else {
     autenticazione();
   }
@@ -33,9 +33,9 @@ function autenticazione()
   $query="SELECT * FROM credenziali WHERE Email='$email' AND Password='$password'";
   $result=mysqli_query($connection, $query);
   if (@mysqli_num_rows($result)==1)
-      echo file_get_contents("home.html");
+      echo file_get_contents("index.html");
     else
-      echo "<center>Riprovare</center>".file_get_contents("index.html");
+      echo "<center>Riprovare</center>".file_get_contents("login.html");
 }
  ?>
 
