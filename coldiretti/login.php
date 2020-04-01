@@ -35,6 +35,7 @@ $db = new database;
     else
       echo "<center>Riprovare</center>".file_get_contents("login.html");
 }
+//ciao mamma
  ?>
 
 </body>
