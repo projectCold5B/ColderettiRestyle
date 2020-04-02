@@ -16,7 +16,7 @@ $db = new database;
 $connection=$db->Connect();
 
 //Tramite la sessione ricavo la mail dell'utente loggato che sta richiedendo il cambio password
-$user = $SESSION['email'];
+$user = $_SESSION['email'];
 $query="SELECT Password FROM clienti WHERE email='".$user."'";
 //$result=mysqli_query($connection, $query);
 $row = mysql_fetch_assoc($query);
@@ -27,10 +27,15 @@ $PassDB=$row['password'];
 //La nuova password e la conferma coincidono?
 
 if($PassDB!=$PassVecchia || $PassNuova!=$ConfermaPass)
-	echo "<center>Le due password non conincidono</center>".file_get_contents("../CambiaPassword.html");
+	echo "<center> Errore! Controlla che le nuove password coincidano e che la password vecchia sia scritta correttamente</center>".file_get_contents("../CambiaPassword.html");
 //Aggiorno il campo password dell'utente
 else 
-	$query1="UPDATE clienti SET password='".$PassNuova."' WHERE email='".$user."'";
+	{
+		$query1="UPDATE clienti SET password='".$PassNuova."' WHERE email='".$user."'";
+		echo "Password cambiata con successo!"
+	}
+	
+}
 
 ?>
 </body>
