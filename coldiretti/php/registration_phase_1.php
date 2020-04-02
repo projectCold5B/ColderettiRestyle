@@ -19,12 +19,16 @@ $cap=$_POST['cap'];
 $citta=$_POST['citta'];
 $civico=$_POST['civico'];
 
+//controllo che la mail non sia già stata usata
+if (controlloMail($email)==false)
+  echo "<center>Mail già utilizzata</center>".file_get_contents("registration.php");
+
 //Controllo che i campi siano tutti pieni
 if ($nome==null||$cognome==null||$email==null||$telefono==null||$password==null||$confpassword==null||$indirizzo==null||$via==null||$citta==null||$civico==null||$cap==null)
-echo "<center>Verifica che tutti i campi siano riempiti</center>".file_get_contents("index.html");
+echo "<center>Verifica che tutti i campi siano riempiti</center>".file_get_contents("registration.php");
   else
   if($password!=$confpassword)
-    echo "<center>Le due password non conincidono</center>".file_get_contents("index.html");
+    echo "<center>Le due password non conincidono</center>".file_get_contents("registration.php");
     else
     registrazione();
 
@@ -42,7 +46,7 @@ $db = new database;
   if (!$connection) die(mysqli_connect_error());
 
   //query di inserimento dati
-  $query="INSERT INTO utenti (Nome, Cognome, Password, Email, Telefono, Conferma, Via, Ncivico, Citta, CAP) VALUES ($nome, $cognome,$password, $email, $telefono, false, $via, $civico, $citta, $cap)";
+  $query="INSERT INTO clienti (Nome, Cognome, Password, Email, Telefono, Conferma, Via, Ncivico, Citta, CAP) VALUES ($nome, $cognome,$password, $email, $telefono, false, $via, $civico, $citta, $cap)";
 
   //lancio la query
   $result=mysqli_query($connection, $query);
@@ -89,6 +93,28 @@ $db = new database;
     else
       echo "<center>Si è verificato un errore nella registrazione. <br> Per favore, riprovare</center>".file_get_contents("index.html");
 }
+
+//funzione per verificare l'unicità della mail, ovvero che non sia già stata usata per la registrazione
+function controlloMail($email)
+{
+
+  //richiamo alla classe database per la connessione
+  require 'db.php';
+  $db = new database;
+
+   //connessione al database
+   $connection=$db->Connect();
+   if (!$connection) die(mysqli_connect_error());
+
+   //query che cerca una mail già presente sul databse
+   $query="SELECT * FROM clienti WHERE email=$email";
+   $result=mysqli_query($connection, $query);
+   if (@mysqli_num_rows($result)==1)
+    return true;
+   else
+     return false;
+}
+
  ?>
 
 </body>
