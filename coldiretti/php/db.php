@@ -32,6 +32,26 @@ class database{
 	}
 
 
+public function Clear($r){
+	if(	mysqli_free_result($r)){
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+	public function Disconnect($conn){
+
+	if(mysqli_close($conn)){
+			return true;
+		}
+		else
+			return false;
+	}
+
+
 public function login_session( $email,$password)
 {
 	if($this->CheckLog()){
@@ -52,6 +72,9 @@ public function login_session( $email,$password)
 
   	 $_SESSION['email']=$email;
   	 echo "ok";
+
+  	 $this->Disconnect($connection);
+  	 $this->Clear($result);
      return true;
 
     

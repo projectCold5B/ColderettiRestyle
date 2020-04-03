@@ -24,6 +24,7 @@ if(mysql_num_rows($result) == 1)
 	//Creo la password temporanea e la inserisco come password per l'account che ha richiesto il recupero
 	$PassTemporanea=GeneraPsw();
 	$query1="UPDATE clienti SET password='".$passTemporanea."' WHERE email='".$mail_destinatario."'";
+    $db->Clear($result);
 
 	//Definisco il nome e la mail del mittente
 	$nome_mittente = "Coldiretti";
@@ -47,6 +48,7 @@ if(mysql_num_rows($result) == 1)
     $mail_headers .= "MIME-Version: 1.0\r\n";
     $mail_headers .= "Content-type: text/html; charset=iso-8859-1";
 
+    $db->Disconnect($connection);
     //Controllo che la mail sia stata inviata con successo
       if (mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers))
          echo "<h2>Messaggio inviato con successo a " . $mail_destinatario."</h2>";

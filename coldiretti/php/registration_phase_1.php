@@ -6,6 +6,9 @@
   </head>
   <body>
 <?php
+//richiamo alla classe database per la connessione
+require 'db.php';
+$db = new database;
 
 //Raccolgo dati dell'utente
 $nome=($_POST['nome']);
@@ -34,9 +37,7 @@ echo "<center>Verifica che tutti i campi siano riempiti</center>".file_get_conte
 
 function registrazione()
 {
-//richiamo alla classe database per la connessione
-require 'db.php';
-$db = new database;
+
 
   //rendo globali le variabili relative ai dati inseriti dall'utente
   global $nome, $cognome, $email, $telefono, $password, $citta, $civico, $via, $cap;
@@ -51,9 +52,13 @@ $db = new database;
   //lancio la query
   $result=mysqli_query($connection, $query);
   //se la query è andata a buon fine allora...
+    $db->Disconnect($connection);
+
   if ($result)
       {
-          //efinisco mittente e destinatario della mail
+        $db->Clear($result);
+
+          //definisco mittente e destinatario della mail
           $nome_mittente = "Coldiretti";
           $mail_mittente = "Mail Coldiretti";
           $mail_destinatario = $email;
@@ -84,6 +89,11 @@ $db = new database;
           $mail_headers.= "No-Reply: ".$mail_mittente . "\r\n";
           $mail_headers.= "X-Mailer: PHP/" . phpversion();
 
+
+
+
+
+
           if (mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers))
           echo "Messaggio inviato con successo a ".$mail_destinatario;
             else
@@ -98,9 +108,7 @@ $db = new database;
 function controlloMail($email)
 {
 
-  //richiamo alla classe database per la connessione
-  require 'db.php';
-  $db = new database;
+
 
    //connessione al database
    $connection=$db->Connect();
@@ -109,10 +117,16 @@ function controlloMail($email)
    //query che cerca una mail già presente sul databse
    $query="SELECT * FROM clienti WHERE email=$email";
    $result=mysqli_query($connection, $query);
-   if (@mysqli_num_rows($result)==1)
-    return true;
-   else
+   $db->Disconnect($connection);
+   if (@mysqli_num_rows($result)==1){
+    $db->Clear($result);
+        return true;
+   }
+
+   else{
+$db->Clear($result);
      return false;
+   }
 }
 
  ?>

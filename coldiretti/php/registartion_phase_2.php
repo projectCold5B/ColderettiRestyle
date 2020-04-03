@@ -6,7 +6,8 @@
   </head>
   <body>
 <?php
-
+require 'db.php';
+$db = new database;
 //Raccolgo dati dell'utente
 $email=$_GET['email'];
 $password=$_GET['password'];
@@ -21,8 +22,7 @@ echo "<center>Si è verificato un errore, riprova o contatta l'assistenza</cente
 function confermaRegistrazione()
 {
   //parametri connessione database
-require 'db.php';
-$db = new database;
+
 
   //rendo globali le variabili relative ai dati dell'utente
   global $email, $password;
@@ -39,6 +39,8 @@ $db = new database;
   //scarico la query in result
   $result=mysqli_query($connection, $query);
   //se il risultato è positivo (match tra mail e password dell'utente e di una riga del database)...
+    $db->Disconnect($connection);
+
   if (@mysqli_num_rows($result)==1)
   {
     //query per rendere attivo il profilo utente del cliente in questione
@@ -46,11 +48,16 @@ $db = new database;
     //scarico la query in result
     $result=mysqli_query($connection, $query);
     //se la query è andata a buon fine allora...
-    if ($result)
+    if ($result){
+      $db->Clear($result);
       echo "<center><br><br><br>Registrazione confermata</center>";
+    }
      //se la query non è andata a buon fine allora...
     else
-      echo "<center>Si è verificato un errore. Riprovare</center>".file_get_contents("index.php");
+      {
+        $db->Clear($result);
+        echo "<center>Si è verificato un errore. Riprovare</center>".file_get_contents("index.php");
+      }
   }
   //se non c'è il match allora...
   else
