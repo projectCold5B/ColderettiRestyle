@@ -29,7 +29,7 @@ $obj= new objectclass;
 $obj->Navbar($db->CheckLog());
 
 ?>
-  
+
 <div class="container">
 
             <div class="row">
@@ -42,7 +42,7 @@ $obj->Navbar($db->CheckLog());
                     <p class="lead">Ti risponderemo nel tempo più breve possibile.</p>
 
 
-                    <form id="contact-form" method="post" action="contact-2.php" role="form">
+                    <form id="contact-form" method="post" action="php/contattiform.php" role="form">
 
                         <div class="messages"></div>
 
@@ -52,14 +52,14 @@ $obj->Navbar($db->CheckLog());
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="form_name">Nome *</label>
-                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Inserisci il tuo nome *" required="required" data-error="Inserisci il campo nome.">
+                                        <input id="form_name" type="text" name="nome" class="form-control" placeholder="Inserisci il tuo nome *" required="required" data-error="Inserisci il campo nome.">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="form_lastname">Cognome *</label>
-                                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Inserisci il tuo cognome *" required="required" data-error="Inserisci il campo cognome.">
+                                        <input id="form_lastname" type="text" name="cognome" class="form-control" placeholder="Inserisci il tuo cognome *" required="required" data-error="Inserisci il campo cognome.">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@ $obj->Navbar($db->CheckLog());
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="form_phone">Telefono</label>
-                                        <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Inserisci il tuo numero di telefono">
+                                        <input id="form_phone" type="tel" name="telefono" class="form-control" placeholder="Inserisci il tuo numero di telefono">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@ $obj->Navbar($db->CheckLog());
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="form_message">Messaggio *</label>
-                                        <textarea id="form_message" name="message" class="form-control" placeholder="Inserisci messaggio *" rows="4" required="required" data-error="Inserisci un messaggio."></textarea>
+                                        <textarea id="form_message" name="messaggio" class="form-control" placeholder="Inserisci messaggio *" rows="4" required="required" data-error="Inserisci un messaggio."></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ $obj->Navbar($db->CheckLog());
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    
+
                                 </div>
                             </div>
                         </div>

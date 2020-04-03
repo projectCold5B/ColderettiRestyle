@@ -56,12 +56,12 @@ function confermaRegistrazione()
     else
       {
         $db->Clear($result);
-        echo "<center>Si è verificato un errore. Riprovare</center>".file_get_contents("index.php");
+        echo "<center>Si è verificato un errore. Riprovare</center>";
       }
   }
   //se non c'è il match allora...
   else
-    echo "<center>Errore nella procedura, riprovare o contattare l'assistenza</center>".file_get_contents("index.php");
+    echo "<center>Errore nella procedura, riprovare o contattare l'assistenza</center>";
 }
  ?>
 

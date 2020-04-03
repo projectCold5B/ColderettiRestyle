@@ -7,28 +7,29 @@
   <body>
     <?php
 
+      //raccolgo le informazioni inserite dall'utente
       $nome=$_POST['nome'];
       $email=$_POST['email'];
-      $oggetto=$_POST['oggetto'];
       $telefono=$_POST['telefono'];
       $messaggio=$_POST['messaggio'];
 
-      if ($nome==null||$email==null||$oggetto==null||$messaggio==null||telefono==null)
-        echo "<center>Attenzione, compilare tutti i campi</center> <br><br>".file_get_contents("contatti.html");
+
+      if ($nome==null||$email==null||$messaggio==null||$telefono==null)
+        echo "<center>Attenzione, compilare tutti i campi</center> <br><br>";
       else {
         require 'checkmail.php';
         $check->chkEmail($email);
         if (chkEmail)
           invioMail();
         else
-          echo "<center>Inserire una mail valida</center><br><br>".file_get_contents("contatti.html");
+          echo "<center>Inserire una mail valida</center><br><br>";
       }
 
       //invio della mail di contatto a Coldiretti
       function invioMail()
       {
         //rendo globali i dati inseriti dall'utente
-        global $nome, $email, $oggetto, $messaggio, $telefono;
+        global $nome, $email, $messaggio, $telefono;
 
           //invio della mail al destinatario
           // definisco mittente e destinatario della mail
@@ -37,7 +38,7 @@
            $mail_destinatario = "Mail Coldiretti";
 
            // definisco il subject
-           $mail_oggetto = "Nuovo conatto: ".$oggetto;
+           $mail_oggetto = "Nuova richiesta di contatto";
 
            // definisco il messaggio formattato in HTML
            $mail_corpo = "
@@ -73,14 +74,14 @@
                 echo "<center>Controlla la tua casella mail, riceverai la conferma.</center>";
              }
            else {
-             echo "<center>Errore. Nessun messaggio inviato. Verificare che l'indirizzo inserito sia corretto<center>".file_get_contents("contatti.html");
+             echo "<center>Errore. Nessun messaggio inviato. Verificare che l'indirizzo inserito sia corretto<center>";
       }
 
       //invio della mail di conferma all'utente
       function confermaInvio()
       {
         //rendo globali i dati inseriti dall'utente
-        global $nome, $email, $oggetto, $messaggio, $telefono;
+        global $nome, $email, $messaggio, $telefono;
 
         // definisco mittente e destinatario della mail
          $nome_mittente = "Coldiretti";
