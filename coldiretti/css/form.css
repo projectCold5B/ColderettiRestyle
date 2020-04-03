@@ -1,3 +1,13 @@
 .container {
     height: 785px;
 }
+
+.btn-success {
+	background-color: #ffb202;
+	border-color: #ffb202;
+}
+
+.btn-success:hover {
+	background-color: #ffb202;
+	border-color: #ffb202;
+}
