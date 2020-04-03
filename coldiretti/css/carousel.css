@@ -1,0 +1,9 @@
+.carousel-inner{
+  max-height: 796px;
+}
+
+.carousel-inner > .item{
+  min-height: 800px;
+  margin-bottom: 0px;
+  background-size: cover;
+}
