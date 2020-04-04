@@ -65,7 +65,7 @@ public function login_session( $email,$password)
   $connection=$this->Connect();
   if (!$connection) die(mysqli_connect_error());
 
-  $query="SELECT * FROM Clienti WHERE Email='$email' AND Password='$password'";
+  $query="SELECT * FROM Clienti WHERE Email='$email' AND Password='$password' AND Conferma='1'";
   $result=mysqli_query($connection, $query);
   if (@mysqli_num_rows($result)==1){
   	session_start();

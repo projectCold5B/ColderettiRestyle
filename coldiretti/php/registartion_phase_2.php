@@ -44,7 +44,7 @@ function confermaRegistrazione()
   if (@mysqli_num_rows($result)==1)
   {
     //query per rendere attivo il profilo utente del cliente in questione
-    $query="UPDATE clienti SET Conferma=true WHERE Email=$email AND Password=$password";
+    $query="UPDATE clienti SET Conferma='1' WHERE Email=$email AND Password=$password";
     //scarico la query in result
     $result=mysqli_query($connection, $query);
     //se la query è andata a buon fine allora...
