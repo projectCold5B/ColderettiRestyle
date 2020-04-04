@@ -93,7 +93,10 @@ function registrazione()
 
 
 
-
+          // Aggiungo alle intestazioni della mail la definizione di MIME-Version,
+          // Content-type e charset (necessarie per i contenuti in HTML)
+          $mail_headers .= "MIME-Version: 1.0\r\n";
+          $mail_headers .= "Content-type: text/html; charset=iso-8859-1";
 
 
           if (mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers))
