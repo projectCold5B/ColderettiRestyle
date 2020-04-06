@@ -9,19 +9,19 @@
 require 'db.php';
 $db = new database;
 $email=$_POST['email'];
-$password=$_POST['password'];
+$password=md5($_POST['password']);
 
 if ($email==null||$password==null)
   echo "</center>Attenzione, compilare tutti i campi<center>".file_get_contents("login.html");
   else {
    if($db->login_session($email,$password))
    {
-  
+
        echo "<script>
 alert('loggato');
    window.location.href = '../index.php ';
 </script>";
-   
+
    }
    else
    {
