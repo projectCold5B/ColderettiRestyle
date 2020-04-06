@@ -12,8 +12,6 @@ if(!$U){
   echo "<script>alert('effettua il login');</script>".file_get_contents("index.php");
 
 }
-
-
  ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -43,11 +41,59 @@ $obj->Navbar($U);
       <p><a href="#">Link</a></p>
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+      <h1>Nuovo ordine</h1><br>
+
+    <form action="/action_page.php">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Prodotto</th>
+          <th>Quantità</th>
+          <th>Descrizione</th>
+        </tr>
+        </thead>
+        <tr>
+          <td><input type="checkbox" name="carote"><label for="carote">Carote</label><br></td>
+          <td><input type="textbox" name="quantitàC" placeholder="Inserisci la quantità"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="finocchi"><label for="finocchi">Finocchi</label><br></td>
+          <td><input type="textbox" name="quantitàFi" placeholder="Inserisci la quantità"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="uova"><label for="uova">Uova</label><br></td>
+          <td><input type="textbox" name="quantitàU" placeholder="Inserisci la quantità"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="banane"><label for="banane">Banane</label><br></td>
+          <td><input type="textbox" name="quantitàB" placeholder="Inserisci la quantità"></td>
+          <td></td>
+        </tr>
+         <tr>
+          <td><input type="checkbox" name="mele"><label for="mele">Mele</label><br></td>
+          <td><input type="textbox" name="quantitàM" placeholder="Inserisci la quantità"></td>
+          <td></td>
+        </tr>
+         <tr>
+          <td><input type="checkbox" name="fragole"><label for="fragole">Fragole</label><br></td>
+          <td><input type="textbox" name="quantitàFr" placeholder="Inserisci la quantità"></td>
+          <td></td>
+        </tr>
+         <tr>
+          <td><input type="checkbox" name="iceberg"><label for="iceberg">Iceberg</label><br></td>
+          <td><input type="textbox" name="quantitàI" placeholder="Inserisci la quantità"></td>
+          <td></td>
+        </tr>
+         <tr>
+          <td><input type="checkbox" name="arance"><label for="arance">Arance</label><br></td>
+          <td><input type="textbox" name="quantitàA" placeholder="Inserisci la quantità"></td>
+          <td></td>
+        </tr>
+      </table>
+    </form>
     </div>
 
     <div class="col-sm-2 sidenav">
