@@ -47,6 +47,7 @@ function registrazione()
   $connection=$db->Connect();
   if (!$connection) die(mysqli_connect_error());
 
+  $password=md5($password);
   //query di inserimento dati
   $query="INSERT INTO clienti (Nome, Cognome, Password, Email, Telefono, Conferma, Via, Citta, CAP) VALUES ('$nome', '$cognome','$password', '$email', '$telefono', '0', '$via', '$citta', '$cap')";
 
@@ -58,51 +59,47 @@ function registrazione()
   //se la query è andata a buon fine allora...
   if ($result)
       {
-        //$db->Clear($result);
+        //efinisco mittente e destinatario della mail
+        $nome_mittente = "Coldiretti";
+        $mail_mittente = "NONRISPONDERE@Coldiretti.IT";
+        $mail_destinatario = $email;
 
-          //definisco mittente e destinatario della mail
-          $nome_mittente = "Coldiretti";
-          $mail_mittente = "Mail Coldiretti";
-          $mail_destinatario = $email;
+        //definisco il subject e il body della mail
+        $mail_oggetto = "Conferma registrazione account Coldiretti";
+        $mail_corpo = "
+                        <html>
+                        <head>
+                        <title>Recupero password</title>
+                        </head>
+                        <body>
+                        <center>
+                          <h2>Conferma registrazione Coldiretti</h2>
+                          <br><br><br>
+                          <p>Clicca il testo qui sotto per confermare la registrazione<p>
+                          <br><br>
+                          <a href='morenomadeddu.it/php/registration_phase_2.php?email=".$email."&password=".$password."'>CONFERMA</a>
 
-          //definisco il subject e il body della mail
-          $mail_oggetto = "Conferma registrazione account Coldiretti";
-          $mail_corpo = "
-                          <html>
-                          <head>
-                          <title>Recupero password</title>
-                          </head>
-                          <body>
-                          <center>
-                            <h2>Conferma registrazione Coldiretti</h2>
-                            <br><br><br>
-                            <p>Clicca il testo qui sotto per confermare la registrazione<p>
-                            <br><br>
-                            <a href='registration_phase_2.php?email='$email'&password='md5($password)''>CONFERMA</a>
-                          </center>
-                          </body>
-                          </html>
-                        ";
-
-          //aggiusto un po' le intestazioni della mail
-          //E' in questa sezione che deve essere definito il mittente (From)
-          //ed altri eventuali valori come Cc, Bcc, ReplyTo e X-Mailer
-          $mail_headers = "From: ".$nome_mittente." <". $mail_mittente. ">\r\n";
-          $mail_headers.= "No-Reply: ".$mail_mittente . "\r\n";
-          $mail_headers.= "X-Mailer: PHP/" . phpversion();
+                        </center>
+                        </body>
+                        </html>
+                      ";
 
 
 
-          // Aggiungo alle intestazioni della mail la definizione di MIME-Version,
-          // Content-type e charset (necessarie per i contenuti in HTML)
-          $mail_headers .= "MIME-Version: 1.0\r\n";
-          $mail_headers .= "Content-type: text/html; charset=iso-8859-1";
 
+        //aggiusto un po' le intestazioni della mail
+        //E' in questa sezione che deve essere definito il mittente (From)
+        //ed altri eventuali valori come Cc, Bcc, ReplyTo e X-Mailer
+        $mail_headers = "From: ".$nome_mittente." <". $mail_mittente. ">\r\n";
+        $mail_headers.= "No-Reply: ".$mail_mittente . "\r\n";
+        $mail_headers.= "X-Mailer: PHP/" . phpversion() . "\r\n";
+        $mail_headers .= "MIME-Version: 1.0\r\n";
+        $mail_headers .= "Content-type: text/html; charset=iso-8859-1";
 
-          if (mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers))
-          echo "Messaggio inviato con successo a ".$mail_destinatario;
-            else
-              echo "Errore. Nessun messaggio inviato.";
+        if (mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers))
+        echo "Messaggio inviato con successo a ".$mail_destinatario;
+          else
+            echo "Errore. Nessun messaggio inviato.";
       }
       //se la query non è andata a buon fine allora...
     else

@@ -34,7 +34,7 @@ function confermaRegistrazione()
   if (!$connection) die(mysqli_connect_error());
 
   //query di confronto tra i dati dell'utente e quelli nel database
-  $query="SELECT * FROM utenti WHERE Emai=$email AND Password=$password";
+  $query="SELECT * FROM utenti WHERE Emai='$email' AND Password='$password'";
 
   //scarico la query in result
   $result=mysqli_query($connection, $query);
