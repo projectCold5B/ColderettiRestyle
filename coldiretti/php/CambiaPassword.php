@@ -5,6 +5,7 @@
 </head>
 <body>
 <?php
+Session_start();
 //Prendo i dati inseriti nel form e li salvo in 3 variabili
 $PassVecchia=POST_["passVecchia"];
 $PassNuova=POST_["PassNuova"];
