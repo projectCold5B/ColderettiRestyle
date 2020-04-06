@@ -1,10 +1,10 @@
 <?php
 /**
- * 
+ *
  */
 class objectclass
 {
-	
+
 	public function Navbar($value)
 	{
 
@@ -20,7 +20,7 @@ class objectclass
       <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#myNavbar'>
         <span class='icon-bar'></span>
         <span class='icon-bar'></span>
-        <span class='icon-bar'></span>                        
+        <span class='icon-bar'></span>
       </button>
        <img src='img/coldiretti.png'>
     </div>
@@ -30,6 +30,7 @@ class objectclass
         <li><a href='nuovoOrdine.php'><b> Nuovo Ordine </b></a></li>
         <li><a href='iMieiOrdini.php'><b> I miei ordini </b></a></li>
         <li><a href='contatti.php'><b> Contatti </b></a></li>
+				<li><a href='mieidati.php'><b> I miei dati </b></a></li>
       </ul>
       <ul class='nav navbar-nav navbar-right'>
         <li><a href='php/logout.php'><span class='glyphicon glyphicon-log-in'></span><b> Logout </b></a></li>
@@ -50,7 +51,7 @@ echo "
       <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#myNavbar'>
         <span class='icon-bar'></span>
         <span class='icon-bar'></span>
-        <span class='icon-bar'></span>                        
+        <span class='icon-bar'></span>
       </button>
        <img src='img/coldiretti.png'>
     </div>
