@@ -8,7 +8,7 @@
 
 
 //Recupero la mail tramite il metodo post
-$mail_destinatario=POST_['email'];
+$mail_destinatario=$_POST['email'];
 
 //mi connetto al db
 require 'db.php';
@@ -16,14 +16,14 @@ $db = new database;
 $connection=$db->Connect();
 
 //controllo che la mail sia presente sul db
-$query="SELECT Email FROM clienti WHERE email='".$email."'";
+$query="SELECT Email FROM clienti WHERE email='".$mail_destinatario."'";
 $result=mysqli_query($connection, $query);
 
-if(mysql_num_rows($result) == 1)
+if(mysqli_num_rows($result) == 1)
 {
 	//Creo la password temporanea e la inserisco come password per l'account che ha richiesto il recupero
 	$PassTemporanea=GeneraPsw();
-	$query1="UPDATE clienti SET password='".$passTemporanea."' WHERE email='".$mail_destinatario."'";
+	$query1="UPDATE clienti SET password='".$PassTemporanea."' WHERE email='".$mail_destinatario."'";
     $db->Clear($result);
 
 	//Definisco il nome e la mail del mittente

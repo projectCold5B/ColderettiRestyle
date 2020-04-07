@@ -68,7 +68,7 @@ if($db->CheckLog()){
 							Hai perso la
 						</span>
 
-						<a href="#" class="txt2">
+						<a href="RecuperoPassword_form.php" class="txt2">
 							 Password?
 						</a>
 					</div>

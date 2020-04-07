@@ -1,3 +1,22 @@
+<?php
+
+
+
+require 'php/db.php';
+$db = new database;
+
+require 'php/obj.php';
+$obj= new objectclass;
+$U=$db->CheckLog();
+if(!$U){
+  echo "<script>alert('effettua il login');</script>".file_get_contents("index.php");
+
+}
+
+
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,23 +49,23 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="login.php" method="post">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="php/CambiaPassword.php" method="post">
 					<span class="login100-form-title">
 						Accedi
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="passVecchia" placeholder="Inserisci la Password in uso in precedenza">
+						<input class="input100" type="password" name="passVecchia" placeholder="Inserisci la Password in uso in precedenza">
 						<span class="focus-input100"></span>
 					</div>
 					
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="passNuova" placeholder="Nuova Password">
+						<input class="input100" type="password" name="passNuova" placeholder="Nuova Password">
 						<span class="focus-input100"></span>
 					</div>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="confPassNuova" placeholder="Conferma Password">
+						<input class="input100" type="password" name="confPassNuova" placeholder="Conferma Password">
 						<span class="focus-input100"></span>
 					</div>
 

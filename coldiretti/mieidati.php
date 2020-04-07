@@ -5,7 +5,7 @@ require 'php/obj.php';
 $obj= new objectclass;
 $U=$db->CheckLog();
 if(!$U){
-  echo "<script>alert('effettua il login');</script>".file_get_contents("index.php");
+  echo "<script>alert('effettua il login');</script>".file_get_contents("index.php");}
  ?>
 
 <html lang="it">
@@ -22,7 +22,7 @@ if(!$U){
 </head>
 <body>
 
-<?php }
+<?php 
   $obj->Navbar($U);
 ?>
 
@@ -60,8 +60,7 @@ if(!$U){
   if (@mysqli_num_rows($result)==1) {
   // output
   while($row = $result->fetch_assoc()) {
-  echo "<tr><td>" . $row["Nome"]. "</td><td>" . $row["Cognome"] . "</td><td>" . $row["Email"]. "</td><td>"."</td><td>" . $row["Telefono"]. "</td><td>"."</td><td>" . $row["Via"]. "</td><td>".
-  "</td><td>" . $row["Citta"]. "</td><td>"."</td><td>" . $row["CAP"]. "</td><td>"."</td><td>" . $row["Password"]. "</td></tr>";
+  echo "<tr><td>" . $row["Nome"]. "</td><td>" . $row["Cognome"] . "</td><td>" . $row["Email"]. "</td><td>". $row["Telefono"]. "</td><td>" . $row["Via"]. "</td><td>". $row["Citta"]. "</td><td>". $row["CAP"]. "</td><td><a href='CambiaPassword_form.php' >Cambia Password</a></td></tr>";
   }
   echo "</table></div>";
   }

@@ -68,10 +68,10 @@ public function login_session( $email,$password)
   $query="SELECT * FROM Clienti WHERE Email='$email' AND Password='$password' AND Conferma='1'";
   $result=mysqli_query($connection, $query);
   if (@mysqli_num_rows($result)==1){
-  	session_start();
+
 
   	 $_SESSION['email']=$email;
-  	 echo "ok";
+ 
 
   	 $this->Disconnect($connection);
   	 $this->Clear($result);
