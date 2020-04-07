@@ -1,20 +1,13 @@
 <?php
-
-
-
 require 'php/db.php';
 $db = new database;
-
 require 'php/obj.php';
 $obj= new objectclass;
 $U=$db->CheckLog();
-if(!$U){
+if(!$U)
   echo "<script>alert('effettua il login');</script>".file_get_contents("index.php");
+?>
 
-}
-
-
- ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -29,39 +22,70 @@ if(!$U){
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 <?php
 $obj->Navbar($U);
-
 ?>
-<div class="container-fluid text-center">    
+
+<div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
     </div>
-    <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
-    </div>
+    <div class="col-sm-8 text-left">
+      <h1>I tuoi ordini</h1>
+      <p>In questa pagina puoi consultare la lista dei tuoi precedenti ordini</p>
 
-    <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    </div>
-  </div>
-</div>
+       <?php
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
+       //connessione al db
+       $connection=$db->Connect();
+       if (!$connection) die(mysqli_connect_error());
 
-</body>
-</html>
+       $query = "SELECT * FROM ordini WHERE EmailCliente='$_SESSION[email]'";
+       $result = mysqli_query($connection, $query);
+       if (@mysqli_num_rows($result)>=1) {
+       // output
+       while($row = $result->fetch_assoc()) {
+       echo "
+             <table class='table table-bordered'>
+               <thead>
+                 <tr>
+                   <th>Id ordine</th>
+                   <th>Data Ordine</th>
+                   <th>Data Consegna </th>
+                   <th>Note</th>
+                </tr>
+              </thead>
+             <tr><td>" . $row["IDOrdine"]. "</td><td>" . $row["DataOrdine"] . "</td><td>" . $row["DataConsegnaPrevista"]. "</td><td>".$row["Note"]. "</td></tr>";
+       }
+       echo "</table></div>";
+       }
+       else
+       {
+         echo "</table><p>Non hai ancora effettuato un ordine, clicca <a href='nuovoOrdine.php'>QUI</a> per effettuarne uno</p></div>";
+       }
+
+       //disconnessione dal db
+       $db->Disconnect($connection);
+       ?>
+
+       <div class="col-sm-2 sidenav">
+         <div class="well">
+           <p>ADS</p>
+         </div>
+         <div class="well">
+           <p>ADS</p>
+         </div>
+       </div>
+       </div>
+       </div>
+
+       <footer class="container-fluid text-center">
+       <p>Footer Text</p>
+       </footer>
+
+       </body>
+       </html>

@@ -39,18 +39,18 @@ if($PassDB!=$PassVecchia || $PassNuova!=$ConfermaPass){
 $db->Disconnect($connection);
 }
 //Aggiorno il campo password dell'utente
-else 
+else
 	{
-	
+
 		$query1="UPDATE clienti SET password='".md5($PassNuova)."' WHERE email='".$user."'";
 		if($result=mysqli_query($connection, $query1)){
-			echo "<script> alert('Password Cambiata Con Successo');    window.location.href = '../mieidati.php';</script>";
+			echo "<script> alert('Password Cambiata Con Successo');    window.location.href = '../index.php';</script>";
 			$db->Disconnect($connection);
 				 $db->Clear($result);
 	}
 }
-		
-	
+
+
 
 
 ?>

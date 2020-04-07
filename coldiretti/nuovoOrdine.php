@@ -33,17 +33,17 @@ if(!$U){
 $obj->Navbar($U);
 
 ?>
-<div class="container-fluid text-center">    
+<div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
     </div>
-    <div class="col-sm-8 text-left"> 
+    <div class="col-sm-8 text-left">
       <h1>Nuovo ordine</h1><br>
 
-    <form action="/action_page.php">
+    <form action="php/ordine.php" method="post">
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -93,8 +93,9 @@ $obj->Navbar($U);
           <td></td>
         </tr>
       </table>
+        <center><button type="button" class="btn btn-default">Effettua ordine</button></center><br>
     </form>
-    </div>
+  </div>
 
     <div class="col-sm-2 sidenav">
       <div class="well">
