@@ -15,14 +15,20 @@
 
 
       if ($nome==null||$email==null||$messaggio==null||$telefono==null)
-        echo "<center>Attenzione, compilare tutti i campi</center> <br><br>";
+      echo "<script>
+            alert('Attenzione, compilare tutti i campi');
+            window.location.href = '../contatti.php';
+            </script>";
       else {
         require 'checkmail.php';
-        $check->chkEmail($email);
-        if (chkEmail)
+        $check=chkEmail($email);
+        if ($check)
           invioMail();
         else
-          echo "<center>Inserire una mail valida</center><br><br>";
+        echo "<script>
+              alert('Inserire una mail valida');
+              window.location.href = '../contatti.php';
+              </script>";
       }
 
       //invio della mail di contatto a Coldiretti
@@ -69,9 +75,15 @@
            $mail_headers .= "MIME-Version: 1.0\r\n";
            $mail_headers .= "Content-type: text/html; charset=iso-8859-1";
            if (mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers)) //Se la mail viene inviata con successo allora...
-             {echo "<center><h2>Messaggio inviato con successo a Coldiretti</h2></center>";
+             {echo "<script>
+                   alert('Messaggio inviato con successo a Coldiretti');
+                   window.location.href = '../index.php';
+                   </script>";
                if (confermaInvio())
-                echo "<center>Controlla la tua casella mail, riceverai la conferma.</center>";
+               echo "<script>
+                     alert('Attenzione, compilare tutti i campi');
+                     window.location.href = '../contatti.php';
+                     </script>";
              }
            else {
              echo "<center>Errore. Nessun messaggio inviato. Verificare che l'indirizzo inserito sia corretto<center>";

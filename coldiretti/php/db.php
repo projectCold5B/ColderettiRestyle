@@ -21,10 +21,10 @@ class database{
 
 		$conn = new mysqli($this->dbhost, $this->dbuser, $this->dbpass, $this->dbname);
 		if ($conn) {
-			
+
 			return $conn;
 
-		} 
+		}
 		else {
 			die('Errore:' . $conn->connect_error);
 		}
@@ -65,24 +65,24 @@ public function login_session( $email,$password)
   $connection=$this->Connect();
   if (!$connection) die(mysqli_connect_error());
 
-  $query="SELECT * FROM Clienti WHERE Email='$email' AND Password='$password' AND Conferma='1'";
+  $query="SELECT * FROM clienti WHERE Email='$email' AND Password='$password' AND Conferma='1'";
   $result=mysqli_query($connection, $query);
   if (@mysqli_num_rows($result)==1){
 
 
   	 $_SESSION['email']=$email;
- 
+
 
   	 $this->Disconnect($connection);
   	 $this->Clear($result);
      return true;
 
-    
+
   }
     else{
     	 return false;
     }
-   
+
 
 	}
 }
@@ -93,11 +93,11 @@ public function CheckLog(){
 	 {
 
  		 session_start();
-   			 if (isset($_SESSION['email'])) 
+   			 if (isset($_SESSION['email']))
    			 {
-   			 
+
  			 return true;
-			} 
+			}
 	else
 	{
 
@@ -105,8 +105,8 @@ public function CheckLog(){
 	}
    }
 
- 
- }  
+
+ }
 
 }
 	?>

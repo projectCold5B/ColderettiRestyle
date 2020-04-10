@@ -10,29 +10,53 @@
 require 'db.php';
 $db = new database;
 
+require 'checkmail.php';
+
 //Raccolgo dati dell'utente
 $nome=($_POST['nome']);
-$cognome=($_POST['cognome']);
+$cognome=addslashes(stripslashes($_POST["cognome"]));
 $email=($_POST['email']);
-$telefono=($_POST['telefono']);
-$password=($_POST['password']);
-$confpassword=($_POST['confpass']);
-$via=$_POST['via'];
+$telefono=$_POST['telefono'];
+$password=addslashes(stripslashes($_POST["password"]));
+$confpassword=addslashes(stripslashes($_POST["confpass"]));
+$via=addslashes(stripslashes($_POST["via"]));
 $cap=$_POST['cap'];
-$citta=$_POST['citta'];
+$citta=addslashes(stripslashes($_POST["citta"]));
 
 //controllo che la mail non sia già stata usata
 if (controlloMail($email)==true)
 {
-  echo "Attenzione, email già utilizzata";
+  echo "<script>
+        alert('Attenzione, mail già utilizzata');
+        window.location.href = '../registration.php';
+        </script>";
+}
+$check=chkEmail($email);
+//controllo che la mail sia valida
+if ($check==false)
+{
+  echo "<script>
+        alert('Attenzione, utilizzare una mail valida');
+        window.location.href = '../registration.php';
+        </script>";
 }
 
 //Controllo che i campi siano tutti pieni
 if ($nome==null||$cognome==null||$email==null||$telefono==null||$password==null||$confpassword==null||$via==null||$citta==null||$cap==null)
-echo "<center>Verifica che tutti i campi siano riempiti</center>";
+{
+  echo "<script>
+        alert('Verifica che tutti i campi siano compilati');
+        window.location.href = '../registration.php';
+        </script>";
+}
   else
   if($password!=$confpassword)
-    echo "<center>Le due password non conincidono, riprovare</center>";
+    {
+      echo "<script>
+            alert('Attenzione, le due password non coincidono');
+            window.location.href = '../registration.php';
+            </script>";
+    }
     else
     registrazione();
 
