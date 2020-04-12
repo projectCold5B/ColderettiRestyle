@@ -33,6 +33,7 @@ class objectclass
 				<li><a href='mieidati.php'><b> I miei dati </b></a></li>
       </ul>
       <ul class='nav navbar-nav navbar-right'>
+      <li><a href='Carrello.php'><b class='text-success'> Carrello </b></a></li>
         <li><a href='php/logout.php'><span class='glyphicon glyphicon-log-in'></span><b> Logout </b></a></li>
       </ul>
     </div>
