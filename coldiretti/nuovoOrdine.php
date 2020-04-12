@@ -6,6 +6,60 @@ $obj= new objectclass;
 $U=$db->CheckLog();
 if(!$U)
   echo "<script>alert('effettua il login');</script>".file_get_contents("index.php");
+
+
+
+
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+  if($U){
+
+if(isset( $_REQUEST['Nome'])&&isset( $_REQUEST['quantity']) )
+ $name = $_REQUEST['Nome'];
+$quantity = $_REQUEST['quantity'];
+    if(isset($_SESSION['cart']))
+      {
+
+
+       $q= count($_SESSION['cart']);
+       $Modify=false;
+       for($i=0; $i<$q; $i++) { 
+
+
+  if($_SESSION['cart'][$i][0]==$name){
+        $_SESSION['cart'][$i][1]+=$quantity;
+        $Modify=true;
+        $R=false;
+        }
+
+
+}
+        if( $Modify==false){
+        
+
+            $_SESSION['cart'][$q]=array();
+
+           array_push($_SESSION['cart'][$q],$name,$quantity);
+           echo "<script>alert('nuovo item aggiunto');</script>";
+        }
+        else
+          echo "<script>alert('eseguito');</script>";
+
+       
+      }
+  }
+
+  else
+  {
+ echo "<script>alert('Effettua il login);   </script>";
+                 
+  }
+    // collect value of input field
+   
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +91,8 @@ $obj->Navbar($U);
     <div class="col-sm-8 text-left">
       <h1>Nuovo ordine</h1>
       <p>In questa pagina puoi effettuare un nuovo ordine</p>
+      <div class="w-100 container-fluid">
+
 
        <?php
 
@@ -44,35 +100,35 @@ $obj->Navbar($U);
        $connection=$db->Connect();
        if (!$connection) die(mysqli_connect_error());
 
-       $query = "SELECT Nome, Descrizione FROM prodotti";
+       $query = "SELECT Nome FROM prodotti";
+
        $result = mysqli_query($connection, $query);
        if (@mysqli_num_rows($result)>=1) {
-         echo "
-              <form action='php/ordine.php' method='post'>
-               <table class='table table-bordered'>
-                 <thead>
-                   <tr>
-                     <th>Nome</th>
-                     <th>Descrizione</th>
-                     <th>Quantità</th>
-                  </tr>
-                </thead>";
-       while($row = $result->fetch_assoc()) {
-          echo "<tr><td>"."<input type='checkbox' name='".$row["Nome"]."'>" . $row["Nome"]. "</td><td>" . $row["Descrizione"] . "</td><td>" . "<input type='text' name='quantita' placeholder='Inserisci la quantità'>" . "</td></tr>";
-       }
-       echo "</table>
-             <center><button type='button' class='btn btn-default'>Effettua ordine</button></center><br>
-             </form></div>";
+
+        while ($c=mysqli_fetch_array($result)) {
+             echo "<form method='post' id='".$c[0]."' action='".htmlentities($_SERVER['PHP_SELF'])."' >
+  <div class='card' style=' border :1px solid rgba(0,0,0,.125);'>
+  <input type='hidden' name='Nome' value='".$c[0]."'>
+
+  <h5 class='card-title'>".$c[0]."</h5>
+  <div class='card-body' style='display:flex;flex-direction:row-reverse'>
+    <input  class='btn' type='submit' value='aggiungi'>
+  <input style='width:40px' type='number' id='quantity' name='quantity' min='0' max='10' step='1' value='1'>
+
+  </div>
+  </div></form>";
+        }
+    
        }
        else
        {
-         echo "</table><p>Non ci sono prodotti disponibili</form></div>";
+         echo "</table><p>Non ci sono prodotti disponibili</form>";
        }
 
        //disconnessione dal db
        $db->Disconnect($connection);
        ?>
-
+</div></div>
        <div class="col-sm-2 sidenav">
          <div class="well">
            <p>ADS</p>

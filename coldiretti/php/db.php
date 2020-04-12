@@ -71,7 +71,7 @@ public function login_session( $email,$password)
 
 
   	 $_SESSION['email']=$email;
-
+  	  $_SESSION['cart']=array();
 
   	 $this->Disconnect($connection);
   	 $this->Clear($result);
