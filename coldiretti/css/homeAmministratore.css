@@ -1,0 +1,22 @@
+h1.hA{
+	margin-left: 10%; 
+	margin-top: 2%;
+}
+p.hA{
+	margin-left: 10%;
+}
+div.hA{
+	margin-left: 10%;
+	margin-bottom: 1%;
+	margin-top: 3%;
+	margin-right: 2%;
+	display:block;
+	border-color: black;
+	border-radius: 25px;
+	width:18%; height:10%;
+	background: #ffb202;
+	color:#333;
+	line-height:2;
+	text-align:center;
+	text-decoration:none;
+}
